@@ -1,8 +1,8 @@
 # Teste prático mobile
 
 ## Implementação
-
 Baseado em https://medium.com/@prakash_pun/retrofit-a-simple-android-tutorial-48437e4e5a23
+
 Utilizando http://www.jsonschema2pojo.org/ para gerar modelos
 
 ## Criar um app (Android ou iOS)
