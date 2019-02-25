@@ -8,7 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
 import com.example.tvlist.adapter.CustomAdapter;
-import com.example.tvlist.models.RetroShow;
+import com.example.tvlist.models.ResultSearch;
 import com.example.tvlist.network.GetDataService;
 import com.example.tvlist.network.RetrofitClientInstance;
 
@@ -35,16 +35,16 @@ public class MainActivity extends AppCompatActivity {
 
         /*Create handle for the RetrofitInstance interface*/
         GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
-        Call<List<RetroShow>> call = service.getShows("rick");
-        call.enqueue(new Callback<List<RetroShow>>() {
+        Call<List<ResultSearch>> call = service.getShows("rick");
+        call.enqueue(new Callback<List<ResultSearch>>() {
             @Override
-            public void onResponse(Call<List<RetroShow>> call, Response<List<RetroShow>> response) {
+            public void onResponse(Call<List<ResultSearch>> call, Response<List<ResultSearch>> response) {
                 progressDoalog.dismiss();
                 generateDataList(response.body());
             }
 
             @Override
-            public void onFailure(Call<List<RetroShow>> call, Throwable t) {
+            public void onFailure(Call<List<ResultSearch>> call, Throwable t) {
                 progressDoalog.dismiss();
                 Toast.makeText(MainActivity.this, "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
             }
@@ -52,9 +52,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /*Method to generate List of data using RecyclerView with custom adapter*/
-    private void generateDataList(List<RetroShow> photoList) {
+    private void generateDataList(List<ResultSearch> searchList) {
         recyclerView = findViewById(R.id.customRecyclerView);
-        adapter = new CustomAdapter(this,photoList);
+        adapter = new CustomAdapter(this, searchList);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(MainActivity.this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);

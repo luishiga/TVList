@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.tvlist.R;
-import com.example.tvlist.models.RetroShow;
+import com.example.tvlist.models.ResultSearch;
 import com.jakewharton.picasso.OkHttp3Downloader;
 import com.squareup.picasso.Picasso;
 
@@ -17,10 +17,10 @@ import java.util.List;
 
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomViewHolder> {
 
-    private List<RetroShow> dataList;
+    private List<ResultSearch> dataList;
     private Context context;
 
-    public CustomAdapter(Context context,List<RetroShow> dataList){
+    public CustomAdapter(Context context,List<ResultSearch> dataList){
         this.context = context;
         this.dataList = dataList;
     }
@@ -52,12 +52,12 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
 
     @Override
     public void onBindViewHolder(CustomViewHolder holder, int position) {
-        holder.txtTitle.setText(dataList.get(position).getTitle());
-        holder.txtGenre.setText(dataList.get(position).getGenre());
+        holder.txtTitle.setText(dataList.get(position).getShow().getName());
+        holder.txtGenre.setText(dataList.get(position).getShow().getGenres().toString());
 
         Picasso.Builder builder = new Picasso.Builder(context);
         builder.downloader(new OkHttp3Downloader(context));
-        builder.build().load(dataList.get(position).getPosterUrl())
+        builder.build().load(dataList.get(position).getShow().getImage().getMedium())
                 .placeholder((R.drawable.ic_launcher_background))
                 .error(R.drawable.ic_launcher_background)
                 .into(holder.coverImage);
